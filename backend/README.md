@@ -67,9 +67,9 @@ A comprehensive backend API for managing hospital financial reports, built with 
    
    Update the `.env` file with your configuration:
    ```env
-   MONGODB_URI=mongodb://localhost:27017/hospital_financial
-   JWT_SECRET=your_super_secret_jwt_key_here
-   JWT_EXPIRE=7d
+   MONGODB_URI=*************
+   JWT_SECRET=**********
+   JWT_EXPIRE=*****
    PORT=5000
    NODE_ENV=development
    ```
