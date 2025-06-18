@@ -75,9 +75,9 @@ VITE_API_URL=http://localhost:5000/api
 
 #### Backend (backend/.env)
 ```env
-MONGODB_URI=mongodb://localhost:27017/hospital_financial
-JWT_SECRET=your_super_secret_jwt_key_here
-JWT_EXPIRE=7d
+MONGODB_URI=****************
+JWT_SECRET=**********
+JWT_EXPIRE=********
 PORT=5000
 NODE_ENV=development
 
@@ -295,3 +295,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Support
 
 For support, email support@hospital-financial.com or create an issue in the repository.
+
+![image](https://github.com/user-attachments/assets/5ed9fb7c-ce84-41da-a139-d8b29976abf3)
