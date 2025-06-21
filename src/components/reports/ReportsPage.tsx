@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Download, Edit, Trash2, Eye, Search, Filter, BarChart3, Calculator, FileText, CheckCircle, Clock, AlertCircle } from 'lucide-react';
+import { Plus, Download, Edit, Trash2, Eye, Search, Filter, BarChart3, Calculator, FileText, CheckCircle, Clock, AlertCircle, ArrowLeft } from 'lucide-react';
 import { FinancialReport } from '../../types';
 import { apiClient } from '../../utils/api';
 import { exportToPDF, exportToExcel } from '../../utils/exportUtils';
@@ -70,6 +70,7 @@ const ReportsPage: React.FC = () => {
     setEditingReport(null);
     setShowForm(true);
     setViewMode('list');
+    setViewingReport(null);
     toast.success('Form laporan baru dibuka');
   };
 
@@ -77,6 +78,7 @@ const ReportsPage: React.FC = () => {
     setEditingReport(report);
     setShowForm(true);
     setViewMode('list');
+    setViewingReport(null);
     toast.success(`Mengedit laporan ${report.period}`);
   };
 
@@ -84,7 +86,16 @@ const ReportsPage: React.FC = () => {
     setViewingReport(report);
     setViewMode(mode);
     setShowForm(false);
+    setEditingReport(null);
     toast.success(`Menampilkan ${mode === 'detail' ? 'detail' : mode === 'balance' ? 'neraca' : 'perhitungan pajak'} laporan ${report.period}`);
+  };
+
+  const handleBackToList = () => {
+    setViewMode('list');
+    setViewingReport(null);
+    setShowForm(false);
+    setEditingReport(null);
+    toast.success('Kembali ke daftar laporan');
   };
 
   const handleDeleteReport = (reportId: string) => {
@@ -270,12 +281,7 @@ const ReportsPage: React.FC = () => {
       <ReportForm
         report={editingReport || undefined}
         onSave={handleSaveReport}
-        onCancel={() => {
-          setShowForm(false);
-          setEditingReport(null);
-          setViewMode('list');
-          toast.success('Form laporan ditutup');
-        }}
+        onCancel={handleBackToList}
       />
     );
   }
@@ -284,16 +290,13 @@ const ReportsPage: React.FC = () => {
   if (viewMode === 'detail' && viewingReport) {
     return (
       <div className="space-y-6">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center justify-between">
           <button
-            onClick={() => {
-              setViewMode('list');
-              setViewingReport(null);
-              toast.success('Kembali ke daftar laporan');
-            }}
-            className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors"
+            onClick={handleBackToList}
+            className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
           >
-            ← Kembali ke Daftar
+            <ArrowLeft className="h-4 w-4" />
+            Kembali ke Daftar
           </button>
           <div className="flex gap-2">
             <button
@@ -325,16 +328,13 @@ const ReportsPage: React.FC = () => {
   if (viewMode === 'balance' && viewingReport) {
     return (
       <div className="space-y-6">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center justify-between">
           <button
-            onClick={() => {
-              setViewMode('list');
-              setViewingReport(null);
-              toast.success('Kembali ke daftar laporan');
-            }}
-            className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors"
+            onClick={handleBackToList}
+            className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
           >
-            ← Kembali ke Daftar
+            <ArrowLeft className="h-4 w-4" />
+            Kembali ke Daftar
           </button>
           <div className="flex gap-2">
             <button
@@ -366,16 +366,13 @@ const ReportsPage: React.FC = () => {
   if (viewMode === 'tax' && viewingReport) {
     return (
       <div className="space-y-6">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center justify-between">
           <button
-            onClick={() => {
-              setViewMode('list');
-              setViewingReport(null);
-              toast.success('Kembali ke daftar laporan');
-            }}
-            className="px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors"
+            onClick={handleBackToList}
+            className="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
           >
-            ← Kembali ke Daftar
+            <ArrowLeft className="h-4 w-4" />
+            Kembali ke Daftar
           </button>
           <div className="flex gap-2">
             <button
